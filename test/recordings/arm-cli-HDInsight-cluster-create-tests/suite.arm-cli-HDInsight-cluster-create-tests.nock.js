@@ -6,8 +6,13 @@ exports.getMockedProfile = function () {
   var newProfile = new profile.Profile();
 
   newProfile.addSubscription(new profile.Subscription({
+<<<<<<< HEAD
     id: '26d6d535-5164-443d-82f6-4c695caf7688',
     name: 'BDHadoopHumboldtCRPAdhocTestShortTerm',
+=======
+    id: '12f44720-8952-422c-bb7d-28831c2de639',
+    name: 'BDHadoopHumboltCRUDReliability',
+>>>>>>> 020e4c6585e0b3fd70209f353d3dc71a397246bc
     user: {
       name: 'user@domain.example',
       type: 'user'
@@ -29,4 +34,8 @@ exports.setEnvironment = function() {
 
 exports.scopes = [];
 
+<<<<<<< HEAD
  exports.randomTestIdsGenerated = function() { return ['xplatTestRgHDInsightClusterCreate912','xplatTestHDInsightClusterCreate5946','xplatTestHDInsightClusterCreate2943','xplatTestHDInsightClusterCreate6003'];};
+=======
+ exports.randomTestIdsGenerated = function() { return ['xplatTestRgHDInsightClusterCreate1069','xplatTestHDInsightClusterCreate3257','xplatTestHDInsightClusterCreate2050','xplatTestHDInsightClusterCreate3731'];};
+>>>>>>> 020e4c6585e0b3fd70209f353d3dc71a397246bc

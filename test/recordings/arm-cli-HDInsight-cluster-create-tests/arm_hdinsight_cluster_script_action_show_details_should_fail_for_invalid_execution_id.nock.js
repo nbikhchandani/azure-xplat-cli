@@ -6,8 +6,13 @@ exports.getMockedProfile = function () {
   var newProfile = new profile.Profile();
 
   newProfile.addSubscription(new profile.Subscription({
+<<<<<<< HEAD
     id: '26d6d535-5164-443d-82f6-4c695caf7688',
     name: 'BDHadoopHumboldtCRPAdhocTestShortTerm',
+=======
+    id: '12f44720-8952-422c-bb7d-28831c2de639',
+    name: 'BDHadoopHumboltCRUDReliability',
+>>>>>>> 020e4c6585e0b3fd70209f353d3dc71a397246bc
     user: {
       name: 'user@domain.example',
       type: 'user'
@@ -30,12 +35,18 @@ exports.setEnvironment = function() {
 exports.scopes = [[function (nock) { 
 var result = 
 nock('http://management.azure.com:443')
+<<<<<<< HEAD
   .get('/subscriptions/26d6d535-5164-443d-82f6-4c695caf7688/resourceGroups/xplatTestRgHDInsightClusterCreate912/providers/Microsoft.HDInsight//clusters/xplatTestHDInsightClusterCreate2943/scriptExecutionHistory/1?api-version=2015-03-01-preview')
   .reply(404, "{\"code\":\"NotFound\",\"message\":\"Script with execution id '1' not found for cluster with id 'xplatTestHDInsightClusterCreate2943'\"}", { 'cache-control': 'no-cache',
+=======
+  .get('/subscriptions/12f44720-8952-422c-bb7d-28831c2de639/resourceGroups/xplatTestRgHDInsightClusterCreate1069/providers/Microsoft.HDInsight//clusters/xplatTestHDInsightClusterCreate2050/scriptExecutionHistory/1?api-version=2015-03-01-preview')
+  .reply(404, "{\"code\":\"NotFound\",\"message\":\"Script with execution id '1' not found for cluster with id 'xplatTestHDInsightClusterCreate2050'\"}", { 'cache-control': 'no-cache',
+>>>>>>> 020e4c6585e0b3fd70209f353d3dc71a397246bc
   pragma: 'no-cache',
   'content-length': '128',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
+<<<<<<< HEAD
   'x-ms-request-id': '654a0552-eba0-462e-ad2b-077f7a016587',
   server: 'Microsoft-IIS/8.5',
   'x-powered-by': 'ASP.NET',
@@ -44,17 +55,33 @@ nock('http://management.azure.com:443')
   'x-ms-routing-request-id': 'WESTUS:20160425T233917Z:16d60db4-22f1-4fe2-99c8-1d753bfad368',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   date: 'Mon, 25 Apr 2016 23:39:17 GMT',
+=======
+  'x-ms-request-id': 'ee960b16-ae92-443a-8a8d-693d1099d6f4',
+  server: 'Microsoft-IIS/8.5',
+  'x-powered-by': 'ASP.NET',
+  'x-ms-ratelimit-remaining-subscription-reads': '14987',
+  'x-ms-correlation-request-id': '94309e84-84b4-4d8f-8833-6b7fc20a628f',
+  'x-ms-routing-request-id': 'NORTHCENTRALUS:20160413T203431Z:94309e84-84b4-4d8f-8833-6b7fc20a628f',
+  'strict-transport-security': 'max-age=31536000; includeSubDomains',
+  date: 'Wed, 13 Apr 2016 20:34:31 GMT',
+>>>>>>> 020e4c6585e0b3fd70209f353d3dc71a397246bc
   connection: 'close' });
  return result; },
 function (nock) { 
 var result = 
 nock('https://management.azure.com:443')
+<<<<<<< HEAD
   .get('/subscriptions/26d6d535-5164-443d-82f6-4c695caf7688/resourceGroups/xplatTestRgHDInsightClusterCreate912/providers/Microsoft.HDInsight//clusters/xplatTestHDInsightClusterCreate2943/scriptExecutionHistory/1?api-version=2015-03-01-preview')
   .reply(404, "{\"code\":\"NotFound\",\"message\":\"Script with execution id '1' not found for cluster with id 'xplatTestHDInsightClusterCreate2943'\"}", { 'cache-control': 'no-cache',
+=======
+  .get('/subscriptions/12f44720-8952-422c-bb7d-28831c2de639/resourceGroups/xplatTestRgHDInsightClusterCreate1069/providers/Microsoft.HDInsight//clusters/xplatTestHDInsightClusterCreate2050/scriptExecutionHistory/1?api-version=2015-03-01-preview')
+  .reply(404, "{\"code\":\"NotFound\",\"message\":\"Script with execution id '1' not found for cluster with id 'xplatTestHDInsightClusterCreate2050'\"}", { 'cache-control': 'no-cache',
+>>>>>>> 020e4c6585e0b3fd70209f353d3dc71a397246bc
   pragma: 'no-cache',
   'content-length': '128',
   'content-type': 'application/json; charset=utf-8',
   expires: '-1',
+<<<<<<< HEAD
   'x-ms-request-id': '654a0552-eba0-462e-ad2b-077f7a016587',
   server: 'Microsoft-IIS/8.5',
   'x-powered-by': 'ASP.NET',
@@ -63,5 +90,15 @@ nock('https://management.azure.com:443')
   'x-ms-routing-request-id': 'WESTUS:20160425T233917Z:16d60db4-22f1-4fe2-99c8-1d753bfad368',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   date: 'Mon, 25 Apr 2016 23:39:17 GMT',
+=======
+  'x-ms-request-id': 'ee960b16-ae92-443a-8a8d-693d1099d6f4',
+  server: 'Microsoft-IIS/8.5',
+  'x-powered-by': 'ASP.NET',
+  'x-ms-ratelimit-remaining-subscription-reads': '14987',
+  'x-ms-correlation-request-id': '94309e84-84b4-4d8f-8833-6b7fc20a628f',
+  'x-ms-routing-request-id': 'NORTHCENTRALUS:20160413T203431Z:94309e84-84b4-4d8f-8833-6b7fc20a628f',
+  'strict-transport-security': 'max-age=31536000; includeSubDomains',
+  date: 'Wed, 13 Apr 2016 20:34:31 GMT',
+>>>>>>> 020e4c6585e0b3fd70209f353d3dc71a397246bc
   connection: 'close' });
  return result; }]];

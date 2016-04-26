@@ -38,11 +38,14 @@ var requiredEnvironment = [
 
 var liveOnly = process.env.NOCK_OFF ? it : it.skip;
 var timeBeforeClusterAvailable;
-
 var groupName;
 var clusterNameWindows;
 var clusterNameLinux;
+<<<<<<< HEAD
 var customConfigClusterNameLinux;
+=======
+var clusterNamePremium;
+>>>>>>> 020e4c6585e0b3fd70209f353d3dc71a397246bc
 var createdResources = [];
 var scriptActionName;
 var scriptActionUri;
@@ -83,13 +86,16 @@ describe('arm', function() {
         groupName = suite.generateId(groupPrefix, createdResources);
         clusterNameWindows = suite.generateId(clusterNamePrefix, createdResources);
         clusterNameLinux = suite.generateId(clusterNamePrefix, createdResources);
+<<<<<<< HEAD
 		customConfigClusterNameLinux = suite.generateId(clusterNamePrefix, createdResources);
+=======
+        clusterNamePremium = suite.generateId(clusterNamePrefix, createdResources)+ 'Premium';
+>>>>>>> 020e4c6585e0b3fd70209f353d3dc71a397246bc
         tags = 'a=b;b=c;d=';
         rdpExpiryDate = '12/12/2025';
         timeBeforeClusterAvailable = (!suite.isMocked || suite.isRecording) ? 30000 : 10;
         scriptActionName = 'testscriptname';
         scriptActionUri = 'https://hdiconfigactions.blob.core.windows.net/linuxsampleconfigaction/sample.sh';
-
         if (!suite.isPlayback()) {
           suite.execute('group create %s --location %s --json', groupName, location, function() {
             setTimeout(function() {
@@ -125,7 +131,93 @@ describe('arm', function() {
     });
 
     describe('cluster', function() {
+	     it('create premium linux cluster should pass', function (done) {
+          this.timeout(hdinsightTest.timeoutLarge);
+          var cmd = util.format('hdinsight cluster create ' +
+            '--resource-group %s ' +
+            '--clusterName %s ' +
+            '--location %s ' +
+            '--osType %s ' +
+            '--clusterTier %s ' +
+            '--defaultStorageAccountName %s.blob.core.windows.net ' +
+            '--defaultStorageAccountKey %s ' +
+            '--defaultStorageContainer %s ' +
+            '--headNodeSize %s ' +
+            '--workerNodeCount %s ' +
+            '--workerNodeSize %s ' +
+            '--zookeeperNodeSize %s ' +
+            '--userName %s --password %s ' +
+            '--sshUserName %s --sshPassword %s ' +
+            '--clusterType %s ' +
+            '--version %s ' +
+            '--json ',
+            groupName, clusterNamePremium, location, 'Linux', 'premium',
+            defaultStorageAccount, defaultStorageAccountKey, defaultStorageContainer,
+            headNodeSize, workerNodeCount, workerNodeSize, zookeeperNodeSize,
+            username, password, sshUserName, sshPassword,
+            'Hadoop', '3.4',
+            tags).split(' ');
+          suite.execute(cmd, function (result) {
+              result.text.should.containEql('');
+              result.exitStatus.should.equal(0);
+              if (!suite.isPlayback()) {
+                  setTimeout(function () {
+                      done();
+                  }, HdinsightTestUtil.timeoutLarge);
+              } else {
+                  done();
+              }
+          });
+      });
+	     it('show should display details about premium hdinsight cluster', function (done) {
+	         setTimeout(function () {
+	             var cmd = util.format('hdinsight cluster show --resource-group %s --clusterName %s --json', groupName, clusterNamePremium).split(' ');
+	             suite.execute(cmd, function (result) {
+	                 result.text.should.containEql('');
+	                 result.exitStatus.should.equal(0);
+	                 done();
+	             });
+	         }, timeBeforeClusterAvailable);
+	     });
 
+	  it('create linux cluster should pass', function(done) {
+        this.timeout(hdinsightTest.timeoutLarge);
+        var cmd = util.format('hdinsight cluster create ' +
+          '--resource-group %s ' +
+          '--clusterName %s ' +
+          '--location %s ' +
+          '--osType %s ' +
+          '--defaultStorageAccountName %s.blob.core.windows.net ' +
+          '--defaultStorageAccountKey %s ' +
+          '--defaultStorageContainer %s ' +
+          '--headNodeSize %s ' +
+          '--workerNodeCount %s ' +
+          '--workerNodeSize %s ' +
+          '--zookeeperNodeSize %s ' +
+          '--userName %s --password %s ' +
+          '--sshUserName %s --sshPassword %s ' +
+          '--clusterType %s ' +
+          '--version %s ' +
+          '--json ',
+          groupName, clusterNameLinux, location, 'Linux',
+          defaultStorageAccount, defaultStorageAccountKey, defaultStorageContainer,
+          headNodeSize, workerNodeCount, workerNodeSize, zookeeperNodeSize,
+          username, password, sshUserName, sshPassword,
+          'Hadoop', 'default',
+          tags).split(' ');
+        suite.execute(cmd, function(result) {
+          result.text.should.containEql('');
+          result.exitStatus.should.equal(0);
+          if (!suite.isPlayback()) {
+            setTimeout(function() {
+              done();
+            }, HdinsightTestUtil.timeoutLarge);
+          } else {
+            done();
+          }
+        });
+      });
+	
       it('create windows cluster should pass', function(done) {
         this.timeout(hdinsightTest.timeoutLarge);
         var cmd = util.format('hdinsight cluster create ' +
@@ -151,47 +243,6 @@ describe('arm', function() {
           headNodeSize, workerNodeCount, workerNodeSize, zookeeperNodeSize,
           username, password, rdpUsername, rdpPassword, rdpExpiryDate, 'Hadoop', 'default',
           tags).split(' ');
-
-        suite.execute(cmd, function(result) {
-          result.text.should.containEql('');
-          result.exitStatus.should.equal(0);
-
-          if (!suite.isPlayback()) {
-            setTimeout(function() {
-              done();
-            }, HdinsightTestUtil.timeoutLarge);
-          } else {
-            done();
-          }
-        });
-      });
-
-      it('create linux cluster should pass', function(done) {
-        this.timeout(hdinsightTest.timeoutLarge);
-        var cmd = util.format('hdinsight cluster create ' +
-          '--resource-group %s ' +
-          '--clusterName %s ' +
-          '--location %s ' +
-          '--osType %s ' +
-          '--defaultStorageAccountName %s.blob.core.windows.net ' +
-          '--defaultStorageAccountKey %s ' +
-          '--defaultStorageContainer %s ' +
-          '--headNodeSize %s ' +
-          '--workerNodeCount %s ' +
-          '--workerNodeSize %s ' +
-          '--zookeeperNodeSize %s ' +
-          '--userName %s --password %s ' +
-          '--sshUserName %s --sshPassword %s ' +
-          '--clusterType %s ' +
-          '--version %s ' +
-          '--json ',
-          groupName, clusterNameLinux, location, 'Linux',
-          defaultStorageAccount, defaultStorageAccountKey, defaultStorageContainer,
-          headNodeSize, workerNodeCount, workerNodeSize, zookeeperNodeSize,
-          username, password, sshUserName, sshPassword,
-          'Hadoop', 'default',
-          tags).split(' ');
-
         suite.execute(cmd, function(result) {
           result.text.should.containEql('');
           result.exitStatus.should.equal(0);
@@ -219,7 +270,6 @@ describe('arm', function() {
       it('show should display details about linux hdinsight cluster', function(done) {
         setTimeout(function() {
           var cmd = util.format('hdinsight cluster show --resource-group %s --clusterName %s --json', groupName, clusterNameLinux).split(' ');
-
           suite.execute(cmd, function(result) {
             result.text.should.containEql('');
             result.exitStatus.should.equal(0);
@@ -239,7 +289,6 @@ describe('arm', function() {
       it('list all should display all hdinsight clusters in subscription', function(done) {
         var cmd = util.format('hdinsight cluster list --json', '').split(' ');
         this.timeout(hdinsightTest.timeoutLarge);
-
         suite.execute(cmd, function(result) {
           result.exitStatus.should.equal(0);
           done();
